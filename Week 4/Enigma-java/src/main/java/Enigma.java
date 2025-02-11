@@ -24,6 +24,13 @@ public final class Enigma {
 
         // Steps in brief
         // 1. For each rotor in the list rotors, starting with the last rotor
+        for(int i = 0; i < 26; i++)
+        {
+            if(message.charAt(i) == rotors[i])
+            {
+                
+            }
+        }
         //  1.1 Translate the message using the rotor
         // 2. Apply the CAESAR shift
         // 3. Return the decrypted string
