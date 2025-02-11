@@ -9,13 +9,25 @@ public final class Enigma {
     public static String Encrypt(String message, int incrementNumber,List<String> rotors ){
         // TODO - Implement the Encrypt method
         // Steps in brief
-        List<String>
+        final int startIndex = 101;
+        List<String> encryptedMessage;
+        for(int i=0; i < message.length(); i++)
+        {
+            int encrypt = (startIndex + incrementNumber + i) % 26;
+            String encryptLetter = Integer.toString(encrypt);
+            encryptedMessage.insert(encryptLetter);
+
+            //char encryptLetter = (char)encrypt;
+            
+            //encryptedMessage.insert(encryptLetter);
+        }
+
         // 1. Apply the CAESAR shift using the increment number
         // 2. For each rotor in the list rotors
         //  2.1 Translate the message using the rotor
         // 3. Return the encrypted string
 
-        return "Implement the encrypt method";
+        return encryptedMessage;
     }
 
 
