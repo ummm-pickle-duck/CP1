@@ -21,7 +21,6 @@ public class Main {
         String encryptedMessage = Enigma.Encrypt(startMessage, 4, rotors);
         System.out.println("The encrypted message is: " + encryptedMessage);
 
-        String endMessage = "Crpl Zekde"
         String decryptedMessage = Enigma.Decrypt(encryptedMessage, 4, rotors);
 
         System.out.println("The decrypted message is: " + decryptedMessage);
