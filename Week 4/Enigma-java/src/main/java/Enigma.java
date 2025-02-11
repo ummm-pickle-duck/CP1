@@ -5,21 +5,42 @@
 import java.util.List;
 
 public final class Enigma {
-
-    public static String Encrypt(String message, int incrementNumber,List<String> rotors ){
+    public static String Encrypt(String message, int incrementNumber, List<String> rotors){
         // TODO - Implement the Encrypt method
         // Steps in brief
-        final int startIndex = 101;
-        List<String> encryptedMessage;
-        for(int i=0; i < message.length(); i++)
-        {
-            int encrypt = (startIndex + incrementNumber + i) % 26;
-            String encryptLetter = Integer.toString(encrypt);
-            encryptedMessage.insert(encryptLetter);
+        String upperMessage = message.toUpperCase();
+        String encryptedMessage = "";
+        String nextMessage = "";
 
-            //char encryptLetter = (char)encrypt;
-            
-            //encryptedMessage.insert(encryptLetter);
+        // ABCD
+        // A + 4 + 0 = E
+        char startIndex = 'A';
+
+        int i = 0;
+        for (char c : upperMessage.toCharArray()) {
+            if (c < 'A' || c > 'Z') {
+                nextMessage += c;
+            } else {
+                char nextChar = (char)(((c - startIndex + incrementNumber + i) % 26) + startIndex);
+                nextMessage += nextChar;
+            }
+            i += 1;
+        }
+
+        encryptedMessage = nextMessage;
+
+        for (String rotor : rotors) {
+            nextMessage = "";
+            for (char c : encryptedMessage.toCharArray()) {
+                if (c < 'A' || c > 'Z') {
+                    nextMessage += c;
+                } else {
+                    // we should use modulo here in case there's special characters in the message
+                    int rotorIndex = (c - startIndex) % 26;
+                    nextMessage += rotor.charAt(rotorIndex);
+                }
+            }
+            encryptedMessage = nextMessage;
         }
 
         // 1. Apply the CAESAR shift using the increment number
@@ -29,7 +50,6 @@ public final class Enigma {
 
         return encryptedMessage;
     }
-
 
     public static String Decrypt(String message, int incrementNumber, List<String> rotors)
     {
